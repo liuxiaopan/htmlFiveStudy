@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dataList</title>
+</head>
+<body>
+<form action="section.html" method="get">
+请输入网址：<input type="url" list="url_list" name="weblink"/>
+    <datalist id="url_list">
+        <option label="新浪" value="http://www.sina.com.cn"/>
+        <option label="搜狐" value="http://www.sohu.com"/>
+        <option label="网易" value="http://www.163.com"/>
+        <option label="百度" value="http://www.baidu.com"/>
+    </datalist>
+    <br/>
+    请选择要上传的多个文件：<input type="file" name="img" multiple="multiple"/>
+    <input type="submit" value="submit"/>
+</form>
+</body>
+</html>

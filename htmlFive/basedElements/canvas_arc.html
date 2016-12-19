@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+<canvas id="myRound" style="border: 1px solid sienna; width: 300px;height: 150px;"></canvas><br/>
+<canvas id="myTanc1" style="border: 1px solid sienna; width: 300px;height: 150px;"></canvas><br/>
+<canvas id="myTanc2" style="border: 1px solid sienna; width: 300px;height: 150px;"></canvas><br/>
+<canvas id="clearCanvas" style="border: 1px solid sienna; width: 300px;height: 200px;"></canvas><br/>
+<input name="clear" type="button" value="clearCanvas" onclick="clearMap();"><br/>
+<canvas id="myCanvas" style="border: 1px solid sienna; width: 300px;height: 200px;"></canvas><br/>
+<canvas id="myBezier" style="border: 1px solid sienna; width: 300px;height: 200px;"></canvas><br/>
+<script type="text/javascript">
+    var a=document.getElementById("myRound");
+    var context1=a.getContext("2d");
+    console.log(context1);
+    for(var i=0;i<15;i++){
+        context1.strokeStyle="blue";
+        context1.beginPath();
+        context1.arc(0,150,i*10,0,Math.PI*3/2,true);
+        context1.stroke();
+    }
+
+    var b=document.getElementById("myTanc1");
+    var context2=b.getContext("2d");
+    context2.fillStyle="red";
+    context2.beginPath();
+    context2.moveTo(25,25);
+    context2.lineTo(125,25);
+    context2.lineTo(25,125);
+    context2.closePath();
+    context2.fill();
+
+    var c=document.getElementById("myTanc2");
+    var context3=c.getContext("2d");
+    context3.strokeStyle="yellow";
+    context3.beginPath();
+    context3.moveTo(25,25);
+    context3.lineTo(125,25);
+    context3.lineTo(25,125);
+    context3.closePath();
+    context3.stroke();
+
+    var d=document.getElementById("clearCanvas");
+    var context4=d.getContext("2d");
+    context4.strokeStyle="#FF00FF";
+    context4.beginPath();
+    context4.arc(150,150,100,-Math.PI*1/6,-Math.PI*5/6,true);
+//    context4.closePath();
+    context4.stroke();
+    function clearMap() {
+        context4.clearRect(0,0,300,200);
+    }
+//二次方赛贝尔曲线
+    var e=document.getElementById("myCanvas");
+    var context5=e.getContext("2d");
+    context5.strokeStyle="#000000";
+    context5.beginPath();
+    context5.moveTo(0,200);
+    context5.quadraticCurveTo(75,50,300,200);
+    context5.stroke();
+    context5.globalCompositeOperation="source-over";
+
+    context5.strokeStyle="#ff00ff";
+    context5.beginPath();
+    context5.moveTo(75,50);
+    context5.lineTo(0,200);
+    context5.moveTo(75,50);
+    context5.lineTo(300,200);
+    context5.stroke();
+
+    //三次方赛贝尔曲线
+
+    var f=document.getElementById("myBezier");
+    var context6= f.getContext("2d");
+    context6.strokeStyle="#000000";
+    context6.beginPath();
+    context6.moveTo(0,200);
+    context6.bezierCurveTo(25,50,75,50,300,200);
+    context6.stroke();
+    context6.globalCompositeOperation="source-over";
+
+    context6.strokeStyle="#ff00ff";
+    context6.beginPath();
+    context6.moveTo(25,50);
+    context6.lineTo(0,200);
+    context6.moveTo(75,50);
+    context6.lineTo(300,200);
+    context6.stroke();
+
+</script>
+</body>
+</html>

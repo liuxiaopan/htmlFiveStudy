@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shadow</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="200"></canvas>
+<script type="text/javascript">
+    function draw(){
+        var ctx=document.getElementById('myCanvas').getContext('2d');
+        ctx.shadowOffsetX=10;
+        ctx.shadowOffsetY=10;
+        ctx.shadowBlur=15;
+        ctx.shadowColor="rgba(0,0,0,0.5)";
+        ctx.fillStyle="#33ccff";
+        ctx.fillRect(20,20,420,60);
+        ctx.fill();
+
+        ctx.font="45px 黑体";
+        ctx.strokeStyle="#fff";
+        var txt="HTML5+CSS3aaqqqqw";
+        ctx.strokeText(txt,30,64);
+
+        var mtxt1=ctx.measureText(txt);
+
+        ctx.fillText(mtxt1.width,30,150);
+    }
+    window.onload=function(){
+        draw();
+    }
+</script>
+</body>
+</html>

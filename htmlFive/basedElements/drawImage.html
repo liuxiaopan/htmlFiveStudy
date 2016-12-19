@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drawImage</title>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="500"></canvas>
+
+<canvas id="myCanvas2" style="border: 1px solid #3fff16;" width="400" height="500"></canvas>
+<script type="text/javascript">
+ function draw() {
+     var ctx=document.getElementById("myCanvas").getContext("2d");
+     var img=new Image();
+     img.onload=function () {
+         ctx.drawImage(img,0,0);
+         ctx.font="italic 30px Arial Black";
+         ctx.shadowOffsetY=3;
+         ctx.shadowOffsetY=3;
+         ctx.shadowBlur=2;
+         ctx.shadowColor="rgb(0,0,0,0.9)";
+         ctx.fillStyle="orange";
+         ctx.fillText("Hello",105,165);
+     }
+     img.src="../images/luckLeaf.gif";
+ }
+
+ function draw2() {
+     var ctx=document.getElementById("myCanvas2").getContext("2d");
+     var img=new Image();
+     img.onload=function () {
+         ctx.drawImage(img,0,0);
+         ctx.drawImage(img,30,40,140,140,0,240,100,100);
+     }
+     img.src="../images/luckLeaf.gif";
+ }
+ window.onload=function () {
+//     draw();
+     draw2();
+ }
+</script>
+</body>
+</html>

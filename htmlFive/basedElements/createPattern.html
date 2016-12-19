@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>createPattern</title>
+</head>
+<body>
+<canvas id="myCanvas" style="border: 1px solid #3fff16;" width="1200" height="600"></canvas>
+<script type="text/javascript">
+ function draw() {
+     var ctx=document.getElementById("myCanvas").getContext("2d");
+     var objImage=new Image();
+     objImage.src="../images/luckLeaf.gif";
+     objImage.onload=function () {
+         var ptrn=ctx.createPattern(objImage,"repeat");
+         ctx.fillStyle=ptrn;
+         ctx.fillRect(0,0,1200,600);
+     }
+ }
+ window.onload=function(){
+     draw();
+ }
+</script>
+</body>
+</html>

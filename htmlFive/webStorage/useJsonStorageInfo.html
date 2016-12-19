@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>use json to storage object </title>
+  <link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css"/>
+  <style type="text/css">
+    .info-table{
+      display: none;
+    }
+  </style>
+</head>
+<body onload="getLocalData()">
+<div class="container">
+  <p id="loading">正在读取数据.....</p>
+  <table id="ulMessage" class="table table-responsive info-table">
+
+  </table>
+  <p>
+    <span>
+      学号：<input type="text" readonly="true" id="txtStuId" size="10"/><br/>
+      姓名：<input type="text"  id="txtStuName" size="15"/>
+    </span>
+    <span>
+      性别：<select id="selSex">
+      <option value="男">男</option><option value="女">女</option>
+    </select><br/>
+      总分：<input id="txtStore" type="text" size="8"/>
+    </span>
+    <p>
+      <input id="btnAdd" class="btn btn-primary" value="增加" onclick="btnAdd()">
+    </p>
+
+  </p>
+</div>
+<script type="text/css" src="../lib/jquery.js"></script>
+<script type="text/javascript">
+  var flag="true";
+  function $$(id) {
+    return document.getElementById(id);
+  }
+
+  function btnAdd() {
+    var loading=$$("loading");
+    var ulMessage=$$("ulMessage");
+    if(flag){
+      ulMessage.style.display="block";
+      loading.style.display="none";
+      flag=false;
+    }else {
+      ulMessage.style.display="none";
+      loading.style.display="block";
+      flag=true;
+    };
+    var txtStuId = $$("txtStuId").value;
+    var txtStuName =$$("txtStuName").value;
+    var selSex =$$("selSex").value;
+    var selSex =$$("selSex").value;
+    var txtScore=$$("txtStore").value;
+
+    $$("txtStuId").value = "stu"+retRndNum(4);
+
+    if (txtStuName.length > 0 && txtScore.length>0) {
+      var setData=new Object();
+      setData.stuId=txtStuId;
+      setData.name=txtStuName;
+      setData.sex=selSex;
+      setData.score=txtScore;
+      var strTxtData=JSON.stringify(setData);
+      localStorage.setItem(txtStuId,strTxtData);
+
+    }
+
+    getLocalData();
+    $$("txtStuName").value = "";
+    $$("txtStore").value = "";
+  }
+
+  function getLocalData() {
+    var strHtml = "<tr>" +
+            "<th>学号</th>" +
+            "<th>姓名</th>" +
+            "<th>性别</th>" +
+            "<th>成绩</th>" +
+            "</tr>";
+    for (var i = 0; i < localStorage.length; i++) {
+      var strKey = localStorage.key(i);
+      if (strKey.substring(0, 3) == "stu") {
+        var getData=JSON.parse(localStorage.getItem(strKey));
+        strHtml += "<tr>" +
+                "<td>" + getData.stuId + "</td>" +
+                "<td>" + getData.name + "</td>" +
+                "<td>" + getData.sex + "</td>" +
+                "<td>" + getData.score + "</td>" +
+                "</tr>"
+      }
+    }
+
+    $$("ulMessage").innerHTML = strHtml;
+    $$("txtStuId").value = "stu"+retRndNum(4);
+  }
+
+  function retRndNum(n) {
+    var strRnd = "";
+    for (var i = 0; i < n; i++) {
+      strRnd += Math.floor(Math.random() * 10);
+    }
+    return strRnd;
+  }
+</script>
+</body>
+</html>

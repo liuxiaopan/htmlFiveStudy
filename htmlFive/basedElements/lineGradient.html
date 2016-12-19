@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LineGradient</title>
+</head>
+<body>
+<canvas id="myCanvas" style="border: 1px solid #3fff16;" width="300" height="200"></canvas>
+<script type="text/javascript">
+    function draw() {
+        var ctx=document.getElementById("myCanvas").getContext("2d");
+        var linGrad=ctx.createLinearGradient(0,0,0,200);
+        var arry=["red","blue","yellow","orange","pink","crimson","#bd00d4","#ff9959","#49eeff"];
+        var aryLength=arry.length;
+        for(var i=0;i<aryLength;i++){
+            linGrad.addColorStop(i/aryLength,arry[i]);
+        }
+        ctx.fillStyle=linGrad;
+        ctx.strokeStyle=linGrad;
+        ctx.fillRect(0,0,300,300);
+    }
+
+    window.onload=function () {
+        draw();
+    }
+</script>
+</body>
+</html>

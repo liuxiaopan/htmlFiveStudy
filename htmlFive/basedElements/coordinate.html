@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coordinate </title>
+</head>
+<body>
+<canvas id="myCanvas" style="border: 1px solid crimson;border-radius: 4px;position: absolute;top: 0;right: 0;left: 0;bottom: 0;margin: auto;" width="700" height="200"></canvas>
+<script type="application/javascript">
+    var arry=["red","blue","green","yellow","orange","pink","crimson","#00bcd4","#bd00d4"];
+    function drawTop(ctx, fillStyle) {
+        ctx.fillStyle=fillStyle;
+        ctx.beginPath();
+        ctx.arc(0,0,30,0,Math.PI,true);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function drawGrip(ctx) {
+        ctx.save();
+        ctx.fillStyle="blue";
+        ctx.fillRect(0,0,1.5,40);
+        ctx.beginPath();
+        ctx.strokeStyle="blue";
+        ctx.arc(-2.5,40,4,Math.PI,Math.PI*2,true);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+    }
+
+    function draw() {
+        var ctx=document.getElementById("myCanvas").getContext("2d");
+        ctx.translate(80,80);
+        for(var i=1;i<10;i++){
+            ctx.save();
+            ctx.translate(60*i,0);
+            drawTop(ctx,arry[i-1]);
+            drawGrip(ctx);
+            ctx.restore();
+        }
+    }
+    window.onload=function () {
+        draw();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>选择单个文件上传</title>
+  <style type="text/css">
+    .fileInfo{
+      margin-bottom: 10px;
+    }
+    .fileInfo span{
+      display: inline-block;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+<form id="uploadFile" action="">
+  <fieldset>
+    <legend>上传单个文件</legend>
+    <input type="file" id="fileUpload" name="fileUpload" multiple="true"/>
+    <ul id="ulUpLoad"></ul>
+  </fieldset>
+</form>
+
+<script type="text/javascript">
+  function getId(id){
+    return document.getElementById(id);
+  }
+  var fileUpload=getId("fileUpload");
+  fileUpload.onchange=function (){
+    console.log(this.files);
+    var file=this.files;
+    var strLi="<li class='fileInfo'>" +
+            "<span>file name</span>"+
+            "<span>file type</span>"+
+            "<span>file size</span>"
+    "</li>";
+    for(var i=0;i<file.length;i++){
+      var temp=file[i];
+      console.log(temp);
+      strLi= strLi+"<li class='fileInfo'>" +
+              "<span>"+temp.name+"</span>"+
+              "<span>"+temp.type+"</span>"+
+              "<span>"+temp.size+"</span>"
+      "</li>";
+    }
+    getId("ulUpLoad").innerHTML=strLi;
+  };
+</script>
+</body>
+</html>

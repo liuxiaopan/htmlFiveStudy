@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>radialGradient</title>
+</head>
+<body>
+<canvas id="myCanvas" style="border: 1px solid #3fff16;" width="300" height="200"></canvas>
+<script type="text/javascript">
+    function draw() {
+        var ctx=document.getElementById("myCanvas").getContext("2d");
+        var linGrad=ctx.createRadialGradient(55,55,20,100,100,90);
+        var arry=["#ffffff","red","#000"];
+        linGrad.addColorStop(0,arry[0]);
+        linGrad.addColorStop(0.75,arry[1]);
+        linGrad.addColorStop(1,arry[2]);
+        ctx.fillStyle=linGrad;
+        ctx.strokeStyle=linGrad;
+        ctx.fillRect(0,0,300,300);
+    }
+
+    window.onload=function () {
+        draw();
+    }
+</script>
+</body>
+</html>

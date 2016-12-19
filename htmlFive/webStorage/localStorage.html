@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>localStorage</title>
+  <style type="text/css">
+    ul li{
+      list-style: none;
+      margin-bottom: 15px;
+    }
+
+    #spnStatus{
+      color: #3fff16;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body onload="pageLoad()">
+<form id="localStorageDemo" action="#">
+  <fieldset>
+    <legend>登录</legend>
+    <ul>
+      <li><span id="spnStatus"></span></li>
+      <li>
+        <label for="txtName">Name：</label>
+        <input id="txtName" type="text"/>
+      </li>
+      <li>
+        <label for="txtPass">Passwords：</label>
+        <input id="txtPass" type="password"/>
+      </li>
+      <li>
+
+        <input id="chkSave" type="checkbox"/>
+        <label for="chkSave">是否保存密码</label>
+      </li>
+      <li>
+        <input type="button" name="btnLogin" value="Login" id="btnLog" onclick="btnLogin();"/>
+        <input type="reset" name="rstLog" value="Reset" />
+      </li>
+    </ul>
+  </fieldset>
+</form>
+</body>
+
+<script type="text/javascript">
+  function $$(id){
+    return document.getElementById(id);
+  }
+
+  function pageLoad(){
+    var strName=localStorage.getItem("strName");
+    var strPass=localStorage.getItem("strPass");
+    console.log(strName);
+    if(strName) $$("txtName").value=strName;
+    if(strPass) $$("txtPass").value=strPass;
+//    console.log(btnLogin);
+  }
+
+  function btnLogin(){
+
+    var strName=$$("txtName").value;
+
+    var strPass=$$("txtPass").value;
+    if($$("chkSave").checked){
+      localStorage.setItem("strName",strName);
+      localStorage.setItem("strPass",strPass);
+    }else {
+      localStorage.removeItem("strName");
+    }
+    $$("spnStatus").innerHTML="登录成功！"
+
+  }
+  $$("btnLog").onclick=btnLogin;
+</script>
+</html>

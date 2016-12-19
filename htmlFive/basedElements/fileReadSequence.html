@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>show the sequence of file reading</title>
+</head>
+<body>
+<form id="frmTmp">
+  <fieldset>
+    <legend>文件读取事件的顺序</legend>
+    <input type="file" name="fleUpload" id="fleUpload" onchange="fileUpload_showEvent(this.files);"/>
+    <p id="pStatus"></p>
+  </fieldset>
+</form>
+
+<script type="text/javascript">
+  function　$$(id){
+    return document.getElementById(id);
+  }
+
+  function fileUpload_showEvent(f){
+    if(typeof FileReader=='undefined'){
+      alert("检测到您的浏览器不支持FileReader对象");
+    }
+
+    var tmpFile=f[0];
+    var reader=new FileReader();
+    reader.readAsText(tmpFile);
+    reader.onload=function(e){
+
+
+      $$("pStatus").style.display="block";
+      $$("pStatus").innerHTML+="success!";
+    }
+
+    reader.onloadstart=function (e) {
+
+      $$("pStatus").style.display="block";
+      $$("pStatus").innerHTML+="starting!";
+    }
+    reader.onloadend=function (e) {
+
+      $$("pStatus").style.display="block";
+      $$("pStatus").innerHTML+="ending!";
+    }
+    reader.onprogress=function (e) {
+
+      $$("pStatus").style.display="block";
+      $$("pStatus").innerHTML+="progressing!";
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拖放选择上传文件</title>
+  <style type="text/css">
+    #ulUpload{
+      border: 1px solid #3fff16;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+<form id="frmTmp">
+  <fieldset>
+    <legend>拖动选择文件：</legend>
+    <ul id="ulUpload" ondrop="dropFile(event)" ondragenter="return false" ondagover="return false"></ul>
+  </fieldset>
+</form>
+</body>
+<script type="text/javascript">
+  function　$$(id){
+    return document.getElementById(id);
+  }
+
+  function fileUpload_MoveFile(f){
+    console.log(f);
+    if(typeof FileReader=="undefined"){
+      alert("检测到您的浏览器不支持FileReader对象！");
+    }
+
+    for(var i=0;i<f.length;i++){
+      var tmpFile=f[i];
+      var reader=new FileReader();
+      reader.onload=(function (f1) {
+        return function (e) {
+          var eleSpan=document.createElement('span');
+          eleSpan.innerHTML=['<img src="',e.target.result,'"title="',f1.name,'"/>'].join('');
+          $$('ulUpload').insertBefore(eleSpan,null);
+        }
+      })(tmpFile);
+    }
+  }
+  function dropFile(e) {
+    fileUpload_MoveFile(e.dataTransfer.files);
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+
+</script>
+</html>

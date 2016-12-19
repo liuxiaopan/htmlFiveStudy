@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clip</title>
+</head>
+<body>
+<canvas id="myCanvas" style="border: 1px solid salmon;" width="300" height="300"></canvas>
+<script type="application/javascript">
+    function draw() {
+        var ctx=document.getElementById("myCanvas").getContext("2d");
+        ctx.fillStyle="black";
+        ctx.fillRect(0,0,300,300);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(150,150,130,0,Math.PI*2,true);
+        ctx.clip();
+        ctx.translate(200,20);
+        for(var i=0;i<91;i++){
+            ctx.save();
+            ctx.transform(0.95,0,0,0.95,30,30);//按0.95的比例进行缩放
+            ctx.rotate(Math.PI/12);
+            ctx.beginPath();
+            ctx.fillStyle="red";
+            ctx.globalAlpha="0.4";
+            ctx.arc(0,0,50,0,Math.PI*2,true);
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+    window.onload=function(){
+        draw();
+    }
+</script>
+</body>
+</html>

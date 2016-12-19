@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LineWidth</title>
+</head>
+<body>
+<canvas id="myCanvas1" style="border: 1px solid #3fff16;" width="300" height="300"></canvas>
+<canvas id="myCanvas2" style="border: 1px solid #3fff16;" width="300" height="300"></canvas>
+<script type="text/javascript">
+function draw1() {
+    var c=document.getElementById("myCanvas1").getContext("2d");
+    var arry=["red","blue","green","yellow","orange","pink","crimson","#00bcd4","#bd00d4","#ff9959","#49eeff","#3fff16"];
+    for(var i=0;i<12;i++){
+        c.strokeStyle=arry[i];
+        c.lineWidth=2+i;
+        c.beginPath();
+        c.moveTo(20,5+i*20);
+        c.lineTo(280,5+i*20);
+        c.stroke();
+    }
+}
+function draw2() {
+    var ctx=document.getElementById("myCanvas2").getContext("2d");
+    var lineClip=["butt","round","square"];
+    ctx.strokeStyle="red";
+    ctx.beginPath();
+    ctx.moveTo(10,10);
+    ctx.lineTo(10,150);
+    ctx.moveTo(150,10);
+    ctx.lineTo(150,150);
+    ctx.stroke();
+
+    ctx.strokeStyle="blue";
+    for(var i=0;i<lineClip.length;i++){
+        ctx.lineWidth=10;
+        ctx.lineCap=lineClip[i];
+        ctx.beginPath();
+        ctx.moveTo(10,30+i*50);
+        ctx.lineTo(150,30+i*50);
+        ctx.stroke();
+    }
+}
+window.onload=function () {
+    draw1();
+    draw2();
+}
+
+</script>
+</body>
+</html>

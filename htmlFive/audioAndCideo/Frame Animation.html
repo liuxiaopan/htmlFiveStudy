@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Frame Animation</title>
+</head>
+<body>
+<video id="movies" autoplay oncanplay="startVideo()" onended="stopTimeline()" autobuffer="true"
+       width="400px" height="300px">
+    <source src="../audio/girlsDay.mkv" type="video/mp4"/>
+</video>
+<canvas id="timeline" width="400px" height="300px"></canvas>
+<script type="text/javascript">
+    var updateInterval=5000;//更新间隔，控制抓取帧的频率
+    var frameWidth=200;//制定在canvas中每一帧的宽度
+    var frameHeight=75;//制定在canvas中每一帧的高度
+    var frameRows=4;
+    var frameColumns=4;
+    var frameGrid=frameRows*frameColumns;
+    var frameCount=0;
+    var intervalId=null;//用来停止抓取帧的定时器
+    var vedioStarted=false;//用来确保每个实例只创建一个定时器
+    var video=document.getElementById("movies");
+    var timeline=document.getElementById("timeline");
+    function  startVideo() {
+        if(vedioStarted) return;
+        vedioStarted=true;
+        updateFrame();
+        intervalId=setInterval(updateFrame,updateInterval);
+
+        timeline.onclick=function (evt) {
+            console.log(evt);
+            var offX=evt.layerX-timeline.offsetLeft;
+            var offY=evt.layerY-timeline.offsetTop;
+            var clickedFrame=Math.floor(offY/frameHeight)*frameRows;
+            clickedFrame+=Math.floor(offX/frameWidth);
+            var seekedFrame=(((Math.floor(frameCount/frameGrid))*frameGrid)+clickedFrame);
+            if(clickedFrame>(frameCount%16)){
+                seekedFrame-=frameGrid;
+            }
+            if(seekedFrame<0){
+                return;
+            }
+            video.currentTime=seekedFrame*updateInterval/1000;
+            frameCount=seekedFrame;
+
+        }
+    }
+
+    function updateFrame() {
+       var ctx=timeline.getContext("2d");
+        var framePosition=frameCount%frameGrid;//获取当前帧数
+        var frameX=(framePosition%frameColumns)*frameWidth;
+        var frameY=(Math.floor(framePosition/frameRows))*frameHeight;
+        ctx.drawImage(video,0,0,400,300,frameX,frameY,frameWidth,frameHeight);
+        frameCount++;
+    }
+    function stopTimeline() {
+        clearInterval(intervalId);
+    }
+</script>
+</body>
+</html>

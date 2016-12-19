@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video</title>
+</head>
+<body>
+<video src="../audio/girlsDay.mkv" id="MV" onmouseover="this.play()"
+       autobuffer="true" controls="controls" width="400px" height="300px"></video>
+
+<script type="text/javascript">
+ window.setInterval(function () {
+     var mv=document.getElementById("MV").played;
+     console.log(mv);
+     for(var i=0;i<mv.length;i++){
+         var start=mv.start(i);
+         var end=mv.end(i);
+         alert("mv从"+start+"开始播放"+end+"结束。");
+     }
+
+ },3000);
+</script>
+</body>
+</html>

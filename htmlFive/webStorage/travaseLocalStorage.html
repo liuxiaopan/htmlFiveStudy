@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>travaseLocalStorage</title>
+  <link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <table id="ulMessage" class="table table-responsive">
+
+  </table>
+  <p>
+  <textarea name="txtContent" id="txtContent" cols="37" rows="5">
+
+  </textarea><br/>
+    <input type="button" class="btn btn-primary" id="btnAdd" value="发表"
+           onclick="btnAdd();"/>
+  </p>
+</div>
+
+<script type="text/javascript">
+  function $$(id) {
+    return document.getElementById(id);
+  }
+
+  function btnAdd(){
+    var strContent=$$("txtContent").value;
+    var strTime=new Date();
+    if(strContent.length>0){
+      var strKey="cnt"+retRndNum(4);
+      var strVal=strContent+","+strTime.toLocaleTimeString();
+      localStorage.setItem(strKey,strVal);
+    }
+
+    getLocalData();
+    $$("txtContent").value="";
+  }
+
+  function getLocalData(){
+    var strHtml="<tr>" +
+                    "<th>编号</th>"+
+                    "<th>内容</th>"+
+                    "<th>时间</th>"+
+            "</tr>";
+    var strArr=new Array();
+    for(var i=0;i<localStorage.length;i++){
+      var strKey=localStorage.key(i);
+      console.log(strKey);
+      if(strKey.substring(0,3)=="cnt"){
+        var strVal=localStorage.getItem(strKey);
+        strArr=strVal.split(",");
+        strHtml+="<tr>" +
+                "<td>"+strKey+"</td>"+
+                "<td>"+strArr[0]+"</td>"+
+                "<td>"+strArr[1]+"</td>"+
+                "</tr>"
+      }
+    }
+
+    $$("ulMessage").innerHTML=strHtml;
+  }
+
+  function retRndNum(n) {
+    var strRnd="";
+    for(var i=0;i<n;i++){
+      strRnd+=Math.floor(Math.random()*10);
+    }
+    return strRnd;
+  }
+</script>
+</body>
+</html>

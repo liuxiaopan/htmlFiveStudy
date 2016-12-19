@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>poster attribute in video</title>
+  <style type="text/css">
+    #spnStatus{
+      font-size: 30px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <video id="vdoMain" src="http://www.example.com/song.ogg"
+         width="360px" height="220px" controls="true"
+         poster="../images/kakaxi.jpeg" onprogress="video_progress(this)">
+    你的浏览器不支持是视频
+  </video>
+  <div id="spnStatus"></div>
+</div>
+
+
+<script type="text/javascript">
+  function $$(id) {
+    return document.getElementById(id);
+  }
+  function video_progress(e){
+    console.log($$("spnStatus"));
+    var intState=e.networkState;
+    $$("spnStatus").style.display="block";
+    $$("spnStatus").innerHTML+=strByNum(intState);
+//    if(intState==1){
+//      $$("spnStatus").style.display="none";
+//    }
+  }
+  function strByNum(n){
+    switch (n){
+      case 0:
+        return "initing...";
+      case 1:
+        return "completing";
+      case 2:
+        return "loading";
+      case 3:
+        return "defeating"
+    }
+  }
+</script>
+</body>
+</html>
